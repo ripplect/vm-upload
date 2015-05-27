@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{user.first_name}} @ ripplect
+{% endblock title %}
+
+{% block brandurl %}{% url 'account_home' %}{% endblock brandurl %}
+
+{% block navigationLinks %}
+	{% block RippleAdditionLing %}
+	<li> <a href="{% url 'newQuery' %}"> Add Ripple </a> </li>
+	{% endblock RippleAdditionLing %}
+	<li> <a href="{% url 'ripples' %}"> All Ripples </a> </li>
+{% endblock navigationLinks %}
+
+
+{% block content %}
+    <div class="well col-md-8">
+      {% include "data/query_list_snippet.html" with header="My Ripples!! " queryList=userQueries detailQueryList=queriesWithDetails %}
+    </div>
+{% endblock content %}  

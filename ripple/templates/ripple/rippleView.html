@@ -1,0 +1,8 @@
+{% extends "accounts/home.html" %}
+
+
+{% block content %}
+    <div class="well col-md-8">
+      {% include "data/ripplect_details_snippet.html" with header="Ripplect" detailQuery=queryWithDetails opinionAddButton=OpinionButtonFlag%}
+    </div>
+{% endblock content %}  

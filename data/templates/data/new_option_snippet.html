@@ -1,0 +1,11 @@
+<h3 class="panel-header"> {{header}}</h3>
+
+<div class="well col-md-6">
+	<p> Enter your Option</p>
+	<form action="" method="post">
+		{% csrf_token %}
+		{{ formOpinionWithoutOwner|crispy }}
+		{{ }}
+			<button type="submit"> Add Option</buttom>
+	</form>
+</div>

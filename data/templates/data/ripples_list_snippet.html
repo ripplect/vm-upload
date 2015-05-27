@@ -1,0 +1,49 @@
+<h3 class="panel-header"> {{header}}</h3>
+
+<div class="list-group">
+	{% load endless %}
+	{% paginate detailQueryList %}
+	{% for detailQuery in detailQueryList %}
+		<div class="well col-md-12">
+			<p> {{detailQuery.query.queryOwner.first_name}} </p>
+			<a class="list-group-item" href="{% url 'rippleView' pk=detailQuery.query.id %}">
+				{{detailQuery.query}}
+			</a>
+			
+			<!--div class="list-group"-->
+			{% for opinion in detailQuery.opinionList %}
+				<div class="well col-md-4">
+					
+					<a class="list-group-item" href="#">
+						{{opinion}}
+					</a>
+
+					<a class="well col-xs-2" href="#">
+						<span class="glyphicon glyphicon-trash"</span>
+					</a>
+					<a class="well col-xs-2"  href="#">
+						<span class="glyphicon glyphicon-thumbs-down"</span>  
+					</a>
+
+					<a class="well col-xs-2" href="#">
+						<span class="glyphicon glyphicon-thumbs-up"</span>
+					</a>
+					
+				</div>
+			{% empty %}
+				<span class="list-group-item">No Views</span>
+			{% endfor %}
+			{% if detailQuery.OpinionAddButton %}
+				<a class="well col-md-4" href="{% url 'newOpinion' qid=detailQuery.query.id %}"><span class="glyphicon glyphicon-plus"</span> Add</a>
+
+			{% endif %}
+
+			<!--/div-->
+
+		</div>
+	{% empty %}
+		<span class="list-group-item">No ripple Available</span>
+	{% endfor %}
+	{% show_more %}
+
+</div>

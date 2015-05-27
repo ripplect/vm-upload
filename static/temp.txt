@@ -1,0 +1,60 @@
+drop table dataStore_UserOpinionTagMapping;
+drop table dataStore_UserQueryTagMapping;
+drop table dataStore_UserTags;
+drop table dataStore_UserOpinionIrrelevant;
+drop table dataStore_UserOpinionDislike;
+drop table dataStore_UserOpinionLikes;
+drop table dataStore_UserOpinions;
+drop table dataStore_UserQueryComments;
+drop table dataStore_UserQueries;
+
+
+
+
+
+class UserQueries(models.Model):
+	queryOwner = models.ForeignKey(User, related_name="userQueryOwner")
+	question = models.CharField(max_length=64)
+	timeStamp = models.DateTimeField(auto_now_add=True)
+	comment = models.CharField(max_length=128,blank=True)
+
+
+class UserQueryComments(models.Model):
+	question = models.ForeignKey(UserQueries)
+	commentOwner = models.ForeignKey(User)
+	timeStamp = models.DateTimeField(auto_now_add=True)
+	commentText = models.CharField(max_length=128,blank=True)
+
+
+class UserOpinions(models.Model):
+	opinionOwner = models.ForeignKey(User, related_name="userOpinionOwner")
+	questionOfOpinion = models.ForeignKey(UserQueries,related_name="parentUserQuery")
+	opinion = models.CharField(max_length=64)
+	timeStamp = models.DateTimeField(auto_now_add=True)
+	comment = models.CharField(max_length=128,blank=True)
+
+class UserOpinionLikes(models.Model):
+	likeUser = models.ForeignKey(User)
+	opinionLiked = models.ForeignKey(UserOpinions)
+	timeStamp = models.DateTimeField(auto_now_add=True)
+
+class UserOpinionDislike(models.Model):
+	dislikeUser = models.ForeignKey(User)
+	opinion = models.ForeignKey(UserOpinions)
+	timeStamp = models.DateTimeField(auto_now_add=True)
+
+class UserOpinionIrrelevant(models.Model):
+	irrelevantUser = models.ForeignKey(User)
+	opinion = models.ForeignKey(UserOpinions)
+	timeStamp = models.DateTimeField(auto_now_add=True)
+
+class UserTags(models.Model):
+	tag = models.CharField(max_length=128)
+
+class UserQueryTagMapping(models.Model):
+	tag = models.ForeignKey(UserTags)
+	question = models.ForeignKey(UserQueries)
+
+class UserOpinionTagMapping(models.Model):
+	tag = models.ForeignKey(UserTags)
+	opinion = models.ForeignKey(UserOpinions)

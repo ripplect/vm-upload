@@ -1,0 +1,8 @@
+{% extends "accounts/home.html" %}
+
+
+{% block content %}
+    <div class="well col-md-8">
+      {% include "data/ripples_list_snippet.html" with header="All  Ripples!! " queryList=userQueries detailQueryList=queriesWithDetails %}
+    </div>
+{% endblock content %}  

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="jumbotron"> 
+    {% if user.is_authenticated %}
+      <p> Hi, {{user.username}}!! </p>
+    {% else %}
+    <h1>Welcome to Ripplect </h1>
+    <p> Ripple up quest for public views </p>
+    <p style="margin-top: 1em">
+       <a href="{% url 'ripplect_login' %}"> Click here to login</a>
+    </p>
+    {% endif %}
+  </div>
+{% endblock content %}  
+  

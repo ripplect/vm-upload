@@ -1,0 +1,15 @@
+{% extends "accounts/home.html" %}
+{% load crispy_forms_tags %}
+
+{% block brandurl %}{% url 'account_home' %}{% endblock brandurl %}
+
+{% block content %}
+    <div class="well col-md-6">
+    	<p> Enter Opinion</p>
+    	<form action="" method="post">
+			{% csrf_token %}
+			{{ newOpinionForm|crispy }}
+ 			<button type="submit"> Save</buttom>
+    	</form>
+    </div>
+{% endblock content %}  
